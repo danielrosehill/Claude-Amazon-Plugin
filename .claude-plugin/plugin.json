@@ -1,7 +1,7 @@
 {
   "name": "amazon",
-  "version": "2.1.0",
-  "description": "Claude Code plugin: Amazon marketplace research across Amazon's regional storefronts — verified price, stock, rating, seller and specs from the listing rather than the search grid; delivery dates checked against the postcode they were actually rendered for; storefront, currency and egress resolved from the user's stored delivery addresses rather than assumed. Works around the fact that the default fetch tool cannot reach Amazon and that every fallback route fails in a way that resembles success. Also reads and maintains signed-in account state: order history, the delivery address book, and order cancellation.",
+  "version": "2.2.0",
+  "description": "Claude Code plugin: Amazon marketplace research across Amazon's regional storefronts \u2014 verified price, stock, rating, seller and specs from the listing rather than the search grid; delivery dates checked against the postcode they were actually rendered for; storefront, currency and egress resolved from the user's stored delivery addresses rather than assumed. Works around the fact that the default fetch tool cannot reach Amazon and that every fallback route fails in a way that resembles success. Also reads and maintains signed-in account state: order history, the delivery address book, and order cancellation. Drives a dedicated agent browser (Playwright MCP) before the user's own Chrome; sets the Deliver-to location before searching; runs spec-driven searches end to end into a search folder with results.json, a PDF report, and cart/checkout with explicit confirmation.",
   "author": {
     "name": "Daniel Rosehill",
     "url": "https://github.com/danielrosehill"
@@ -24,6 +24,12 @@
     "order-history",
     "address-book",
     "order-cancel",
-    "account-management"
+    "account-management",
+    "agent-browser",
+    "playwright",
+    "spec-driven",
+    "cart",
+    "checkout",
+    "pdf-report"
   ]
 }

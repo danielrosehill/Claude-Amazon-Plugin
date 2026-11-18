@@ -1,10 +1,12 @@
 ---
 name: amazon-order-history
 description: Query the user's Amazon order history from their signed-in session - when something was bought, what it cost, what is arriving this week, whether an ASIN has been ordered before, and what the current status of an order is. Use when the user asks have I bought this before, when did I order that, what is arriving, how much did I pay for it, or what happened to an order. Read-only; to cancel an order use amazon-order-cancel.
-allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__tabs_close_mcp, Bash(python3 *), Read
+allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__tabs_close_mcp, Bash(python3 *), Read, mcp__agent-browser__browser_navigate, mcp__agent-browser__browser_evaluate, mcp__agent-browser__browser_run_code_unsafe, mcp__agent-browser__browser_snapshot, mcp__agent-browser__browser_click, mcp__agent-browser__browser_tabs, mcp__playwright__browser_navigate, mcp__playwright__browser_evaluate, mcp__playwright__browser_run_code_unsafe, mcp__playwright__browser_snapshot, mcp__playwright__browser_click
 ---
 
 # Amazon order history
+
+> **Browser:** agent browser (Playwright MCP) first, the user's own Chrome only as a stated fallback — see [`reference/browser-route.md`](../../reference/browser-route.md) for the tool mapping. Claude-in-Chrome tool names below map one-to-one.
 
 The question this page answers best is **"have I bought this before"**, because
 every order card carries its own ASINs. Repeat-purchase, price-paid and

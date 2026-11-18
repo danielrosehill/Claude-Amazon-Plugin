@@ -1,10 +1,12 @@
 ---
 name: amazon-delivery-check
 description: Get the delivery facts that exist only inside the user's signed-in Amazon session - same-day and overnight availability, the Prime basket minimum, the order-within cutoff, coupons and Prime-exclusive pricing - plus a check that the Prime membership is still live on the delivery date. Use when the user asks whether something arrives today or tomorrow, whether it beats a deadline, or what it actually costs at checkout. For the standard Prime date, use amazon-listing-check instead; the free route already has it.
-allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__find, mcp__claude-in-chrome__tabs_close_mcp, Bash(python3 *), Read
+allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__find, mcp__claude-in-chrome__tabs_close_mcp, Bash(python3 *), Read, mcp__agent-browser__browser_navigate, mcp__agent-browser__browser_evaluate, mcp__agent-browser__browser_run_code_unsafe, mcp__agent-browser__browser_snapshot, mcp__agent-browser__browser_click, mcp__agent-browser__browser_tabs, mcp__playwright__browser_navigate, mcp__playwright__browser_evaluate, mcp__playwright__browser_run_code_unsafe, mcp__playwright__browser_snapshot, mcp__playwright__browser_click
 ---
 
 # Amazon delivery check
+
+> **Browser:** agent browser (Playwright MCP) first, the user's own Chrome only as a stated fallback — see [`reference/browser-route.md`](../../reference/browser-route.md) for the tool mapping. Claude-in-Chrome tool names below map one-to-one.
 
 ## Come here only for what the free route cannot see
 

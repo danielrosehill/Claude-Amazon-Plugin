@@ -1,10 +1,12 @@
 ---
 name: amazon-order-cancel
 description: Cancel an order, or individual items within an order, on the user's signed-in Amazon account - find the order, confirm exactly what is about to be cancelled, submit the cancellation and verify it actually took effect against the order itself. Use when the user says cancel that order, cancel the X I just bought, or stop that delivery. Requires the user's explicit confirmation of the specific order before submitting.
-allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__find, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__tabs_close_mcp, Read
+allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__find, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__tabs_close_mcp, Read, mcp__agent-browser__browser_navigate, mcp__agent-browser__browser_evaluate, mcp__agent-browser__browser_run_code_unsafe, mcp__agent-browser__browser_snapshot, mcp__agent-browser__browser_click, mcp__agent-browser__browser_tabs, mcp__playwright__browser_navigate, mcp__playwright__browser_evaluate, mcp__playwright__browser_run_code_unsafe, mcp__playwright__browser_snapshot, mcp__playwright__browser_click
 ---
 
 # Amazon order cancel
+
+> **Browser:** agent browser (Playwright MCP) first, the user's own Chrome only as a stated fallback — see [`reference/browser-route.md`](../../reference/browser-route.md) for the tool mapping. Claude-in-Chrome tool names below map one-to-one.
 
 The only skill in this plugin that changes the state of a real order. Everything
 else here reads.

@@ -2,7 +2,8 @@
  * Amazon US search-results extractor.
  *
  * Paste the whole file as the `text` argument to
- * mcp__claude-in-chrome__javascript_tool while a www.amazon.com/s?... page is open.
+ * mcp__claude-in-chrome__javascript_tool (or build a Playwright MCP runner with
+ * scripts/pw_runner.py) while a www.amazon.com/s?... page is open.
  * Returns one row per organic card plus a summary. Verified 2026-08-13.
  *
  * Two rules this file exists to encode, both learned the hard way:

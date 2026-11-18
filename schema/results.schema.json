@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "amazon-results/1",
+  "title": "Amazon search run results",
+  "type": "object",
+  "required": ["schema", "search", "run", "items"],
+  "properties": {
+    "schema": {"const": "amazon-results/1"},
+    "search": {
+      "type": "object",
+      "required": ["slug", "title"],
+      "properties": {
+        "slug": {"type": "string"},
+        "title": {"type": "string"},
+        "spec_ref": {"type": ["string", "null"]},
+        "spec_revision": {"type": ["integer", "null"]}
+      }
+    },
+    "run": {
+      "type": "object",
+      "required": ["id", "read_at", "domain", "deliver_to"],
+      "properties": {
+        "id": {"type": "string"},
+        "read_at": {"type": "string"},
+        "domain": {"type": "string"},
+        "deliver_to": {
+          "type": "object",
+          "required": ["zip", "verified_line"],
+          "properties": {
+            "address_id": {"type": ["string", "null"]},
+            "zip": {"type": "string"},
+            "verified_line": {"type": "string"}
+          }
+        },
+        "prime_membership": {"enum": ["active", "trial", "lapsing", "none", "unverified-needs-reauth"]},
+        "browser": {"type": "string"},
+        "queries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "query": {"type": "string"},
+              "recipe": {"type": ["string", "null"]},
+              "result_count": {"type": ["string", "null"]}
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["asin", "title", "price", "status"],
+        "properties": {
+          "asin": {"type": "string", "pattern": "^[A-Z0-9]{10}$"},
+          "title": {"type": "string"},
+          "brand": {"type": ["string", "null"]},
+          "price": {"type": ["number", "null"]},
+          "currency": {"type": "string"},
+          "shipping": {"type": ["number", "null"]},
+          "shipping_condition": {"type": ["string", "null"]},
+          "total": {"type": ["number", "null"]},
+          "prime_eligible": {"type": ["boolean", "null"]},
+          "prime_exclusive_price": {"type": ["boolean", "null"]},
+          "arrives": {"type": ["string", "null"]},
+          "order_within": {"type": ["string", "null"]},
+          "sold_by": {"type": ["string", "null"]},
+          "ships_from": {"type": ["string", "null"]},
+          "availability": {"type": ["string", "null"]},
+          "rating": {"type": ["number", "null"]},
+          "rating_count": {"type": ["integer", "null"]},
+          "status": {"enum": ["shortlist", "candidate", "rejected", "no-offer"]},
+          "spec_fit": {"type": "object", "additionalProperties": {"enum": ["pass", "fail", "unknown"]}},
+          "notes": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "recommendation": {
+      "type": ["object", "null"],
+      "properties": {
+        "asin": {"type": ["string", "null"]},
+        "why": {"type": "string"}
+      }
+    }
+  }
+}

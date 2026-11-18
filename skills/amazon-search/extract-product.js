@@ -2,7 +2,8 @@
  * Amazon US product-page (/dp/ASIN) extractor.
  *
  * Paste the whole file as the `text` argument to
- * mcp__claude-in-chrome__javascript_tool while a www.amazon.com/dp/... page is open.
+ * mcp__claude-in-chrome__javascript_tool (or build a Playwright MCP runner with
+ * scripts/pw_runner.py) while a www.amazon.com/dp/... page is open.
  * Verified 2026-08-13.
  *
  * Use this when the search card is not enough. Three facts exist only here:

@@ -1,10 +1,12 @@
 ---
 name: amazon-account-import
 description: Fill the user's stored delivery addresses and per-marketplace preferences by reading them out of a signed-in Amazon session — the address book, the default ship-to, Prime membership state and the account's home marketplace — instead of interviewing the user for facts their account already knows. Use when the config is empty or stale, when the user says pull my addresses from Amazon, or after they add an address or start or cancel Prime.
-allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__tabs_close_mcp, Bash(python3 *), Read, Edit, Write
+allowed-tools: mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__tabs_close_mcp, Bash(python3 *), Read, Edit, Write, mcp__agent-browser__browser_navigate, mcp__agent-browser__browser_evaluate, mcp__agent-browser__browser_run_code_unsafe, mcp__agent-browser__browser_snapshot, mcp__agent-browser__browser_click, mcp__agent-browser__browser_tabs, mcp__playwright__browser_navigate, mcp__playwright__browser_evaluate, mcp__playwright__browser_run_code_unsafe, mcp__playwright__browser_snapshot, mcp__playwright__browser_click
 ---
 
 # Amazon account import
+
+> **Browser:** agent browser (Playwright MCP) first, the user's own Chrome only as a stated fallback — see [`reference/browser-route.md`](../../reference/browser-route.md) for the tool mapping. Claude-in-Chrome tool names below map one-to-one.
 
 The account already holds the delivery addresses, the default ship-to and the
 Prime state. Reading them beats asking for them: the user types nothing, and the

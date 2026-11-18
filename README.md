@@ -58,7 +58,15 @@ Anonymous, cheap, stateless — start here:
 - **`amazon-open-asin`** — open an ASIN in your own browser as a clean `/dp/` URL
   on the right storefront, tracking stripped. Hands the page over; reads nothing.
 
-Signed-in browser, for facts that only a session renders:
+Signed-in browser, for facts that only a session renders. Every one of these
+drives a **dedicated agent browser** (a Playwright MCP server with its own
+signed-in profile) first and your own Chrome only as a stated fallback, so your
+main browser is never taken over — see
+[reference/browser-route.md](reference/browser-route.md):
+
+- **`amazon-deliver-to`** — set and verify the session's "Deliver to" ZIP before
+  any search, so every price, Prime badge and date is for the right place; report
+  Prime membership state.
 
 - **`amazon-delivery-check`** — overnight availability, cut-offs, coupons, and
   whether Prime is still in force on the delivery date.
@@ -69,6 +77,19 @@ Signed-in browser, for facts that only a session renders:
 - **`amazon-account-import`** — fills the address book, default ship-to and Prime
   state into the user config from the session, so the interview covers only what
   Amazon cannot answer.
+
+End to end — spec, search, report, order, with nothing left only in the chat:
+
+- **`amazon-spec-shopping`** — save the requirements as a versioned spec, search
+  against it, report, optionally order; resume a saved spec later and see what
+  changed. Folder layout: [reference/workspace-layout.md](reference/workspace-layout.md).
+- **`amazon-research-report`** — flat `results.json` per run
+  ([schema](schema/results.schema.json)) and a PDF from
+  [templates/amazon-report.typ](templates/amazon-report.typ).
+- **`amazon-cart`** — read the cart; add, change or remove a line with your yes
+  on each change and a re-read to verify it.
+- **`amazon-checkout`** — place an order only after you approve the exact
+  review-page summary (ship-to, payment last 4, items, delivery, total).
 
 Account state — the order history and the address book:
 
@@ -196,13 +217,17 @@ Full detail in [`reference/`](reference):
 - The research browser skills are read-only. They do not add to cart, place
   orders, or click controls. If a navigation lands on an unexpected page they
   open a fresh tab instead of interacting.
-- **Two skills write to the account, and only those two.**
+- **Four skills write to the account, and only those four.**
   `amazon-address-book` changes a delivery address; `amazon-order-cancel`
-  cancels an order or items in one. Both state exactly what is about to change,
-  wait for the user's explicit yes on that specific change, and verify the
+  cancels an order or items in one; `amazon-cart` changes the cart;
+  `amazon-checkout` places an order. Each states exactly what is about to change,
+  waits for the user's explicit yes on that specific change, and verifies the
   outcome against the account afterwards rather than trusting a success banner.
-  Neither removes an address, and nothing here places an order or touches a
-  payment method.
+  Checkout's approval is of the final review-page summary, and any change to it
+  voids the approval. Nothing removes an address, uses Buy Now or 1-Click, or
+  touches a payment method.
+- `amazon-deliver-to` changes only the session's browsing location, not the
+  account's addresses.
 
 ## Install
 

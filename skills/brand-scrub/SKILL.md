@@ -1,10 +1,12 @@
 ---
 name: brand-scrub
 description: Ingest a marketplace search-results page, scrub the brand facet, and classify every manufacturer into a persistent allowlist or blocklist. Use when the user wants to filter out third-party junk brands, build or extend a trusted-brand list, or re-run a search restricted to brands they rate. Works against a profile in profiles/ (amazon-us today).
-allowed-tools: Read, Write, Edit, Bash(mkdir *), Bash(cat *), Bash(python3 *), mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__tabs_close_mcp
+allowed-tools: Read, Write, Edit, Bash(mkdir *), Bash(cat *), Bash(python3 *), mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__tabs_close_mcp, mcp__agent-browser__browser_navigate, mcp__agent-browser__browser_evaluate, mcp__agent-browser__browser_run_code_unsafe, mcp__agent-browser__browser_snapshot, mcp__agent-browser__browser_click, mcp__agent-browser__browser_tabs, mcp__playwright__browser_navigate, mcp__playwright__browser_evaluate, mcp__playwright__browser_run_code_unsafe, mcp__playwright__browser_snapshot, mcp__playwright__browser_click
 ---
 
 # Brand scrub
+
+> **Browser:** agent browser (Playwright MCP) first, the user's own Chrome only as a stated fallback — see [`reference/browser-route.md`](../../reference/browser-route.md) for the tool mapping. Claude-in-Chrome tool names below map one-to-one.
 
 Turn a results page into a durable judgement about manufacturers. Amazon's catalogue is
 open, so any popular category fills with interchangeable no-name brands. The star
@@ -48,7 +50,7 @@ profile is the one place that gets edited.
 
 ### 2. Get the page in the real browser
 
-Drive `claude-in-chrome`, not a headless fetch. Per the profile's `session_dependence`,
+Drive a signed-in browser (agent browser first, per `reference/browser-route.md`), not a headless fetch. Per the profile's `session_dependence`,
 an anonymous session hides the curated brand facets and the Prime filter entirely, so a
 scrub run anonymously silently sees a different brand field.
 

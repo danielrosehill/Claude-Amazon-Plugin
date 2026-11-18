@@ -1,10 +1,12 @@
 ---
 name: amazon-search
 description: Run a filtered Amazon US search inside the user's signed-in browser and return a decision table with per-card real delivery dates, Prime-exclusive pricing and brand facets. Use when the answer needs facts that only a signed-in session renders — what arrives today or tomorrow, what it actually costs at checkout, or a search restricted to a trusted brand list. For an anonymous sweep, or when the user has described a need rather than a product, start with amazon-shortlist instead and come here only if the session-only fields are required.
-allowed-tools: Read, Write, Edit, Bash(mkdir *), Bash(python3 *), mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__find, mcp__claude-in-chrome__tabs_close_mcp
+allowed-tools: Read, Write, Edit, Bash(mkdir *), Bash(python3 *), mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__javascript_tool, mcp__claude-in-chrome__find, mcp__claude-in-chrome__tabs_close_mcp, mcp__agent-browser__browser_navigate, mcp__agent-browser__browser_evaluate, mcp__agent-browser__browser_run_code_unsafe, mcp__agent-browser__browser_snapshot, mcp__agent-browser__browser_click, mcp__agent-browser__browser_tabs, mcp__playwright__browser_navigate, mcp__playwright__browser_evaluate, mcp__playwright__browser_run_code_unsafe, mcp__playwright__browser_snapshot, mcp__playwright__browser_click
 ---
 
 # Amazon search (signed-in)
+
+> **Browser:** agent browser (Playwright MCP) first, the user's own Chrome only as a stated fallback — see [`reference/browser-route.md`](../../reference/browser-route.md) for the tool mapping. Claude-in-Chrome tool names below map one-to-one.
 
 **Scope.** This is the browser-driven search. It costs a real browser session and
 earns that cost only when you need per-card delivery dates, Prime-exclusive
@@ -23,15 +25,15 @@ decision, and everything here exists to get them right:
 
 ## Drive the real browser
 
-Use `claude-in-chrome` against the user's signed-in session. This is not a preference,
+Use a signed-in browser — the agent browser per `reference/browser-route.md`, Claude in Chrome as the fallback. A signed-in session is not a preference,
 it is a correctness requirement — the profile's `session_dependence` records that an
 anonymous page hides the Prime filter and the curated brand facets entirely and shows a
 degraded free-shipping stand-in instead. A run without a Prime session answers a
 different question and looks identical.
 
 Delivery promises are computed against the session's delivery ZIP. Read it
-(`#glow-ingress-line2`) and state it with the answer. Do not change it — that is the
-user's account setting.
+(`#glow-ingress-line2`) and state it with the answer. Set it first with `amazon-deliver-to`
+(browsing location only; the account address book is never touched here).
 
 ## Procedure
 
@@ -64,7 +66,7 @@ Two things that will otherwise waste a cycle:
 
 ### 3. Extract
 
-Run `extract-results.js` from this directory via `javascript_tool`. It returns parsed
+Run `extract-results.js` from this directory: on the agent browser via `scripts/pw_runner.py search <url>` + `browser_run_code_unsafe(filename=…)`; on Claude in Chrome via `javascript_tool`. It returns parsed
 rows, never page text. Two constraints are baked into it and must survive any edit:
 
 - **Return parsed fields only.** The Chrome extension blocks results that look like
