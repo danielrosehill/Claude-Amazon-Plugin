@@ -5,8 +5,8 @@ they differ in cost as well as speed — usually the fast one carries a basket
 minimum and the slow one does not. Collapsing them into one sentence throws away
 the trade-off that decides the purchase.
 
-Everything here was measured on `amazon.com` on **2026-08-19**, ship-to ZIP
-`02139`, egressing from the US, against a signed-in Prime account and an
+Everything here was measured on `amazon.com` on **2026-08-19**, ship-to a US
+ZIP, egressing from the US, against a signed-in Prime account and an
 anonymous `curl` side by side.
 
 ## Read the attributes, not the sentence

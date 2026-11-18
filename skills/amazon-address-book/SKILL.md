@@ -73,7 +73,7 @@ renders with a label and invisible directional marks; strip both.
 
    ```
    home (default ship-to)
-     line1:    12 EXAMPLE ST          →  12 Example Street, Apt 4
+     line1:    12 EXAMPLE ST           →  12 Example Street, Apt 4
      postcode: 02139-4307              →  unchanged
    ```
 3. Ask. Wait for a clear yes. Approval for one address is not approval for the

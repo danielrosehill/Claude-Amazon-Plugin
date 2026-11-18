@@ -123,9 +123,9 @@ purpose; this skill never should.
 4. Run the batch script above.
 5. Confirm `shipTo` before quoting anything. It renders **truncated**, as
    `<Town na...> <ZIP>` — so check the ZIP, which is the part that matters and
-   the part that is not cut off. Do not reconstruct the town: `Cambridge Ma... 02139`
-   is Cambridge, **Connecticut**, and the fragment reads like a state
-   abbreviation for a different one.
+   the part that is not cut off. Do not reconstruct the town: a two-word town
+   name cut to `<Town> Ma... <ZIP>` reads like the state abbreviation `MA`
+   even when the ZIP is in another state. The ZIP decides.
 6. Close the tab when done.
 
 ## Reading the result

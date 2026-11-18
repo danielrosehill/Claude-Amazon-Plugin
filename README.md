@@ -126,7 +126,7 @@ an address is how a delivery date gets quoted for last year's flat.
 ```bash
 python3 scripts/user_config.py path              # where the store is
 python3 scripts/user_config.py show              # what is in it, redacted
-python3 scripts/user_config.py resolve home    # storefront, currency, postcode, egress
+python3 scripts/user_config.py resolve home     # storefront, currency, postcode, egress
 ```
 
 Filling it, two halves:
